@@ -2,6 +2,9 @@
 
 namespace App\Http\Resources;
 
+use App\Models\CarType;
+use App\Models\CarBrand;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -16,9 +19,9 @@ class CarResource extends JsonResource
     {
         return [
             "id" => $this->id,
-            "name" => $this->name,
-            "type" => $this->type,
-            "brand" => $this->brand,
+            "name" => Str::title($this->name),
+            "type" => new CarTypeResource(CarType::where("id", $this->type)->first()), // to-do = change to use whenLoaded
+            "brand" => new CarBrandResource(CarBrand::where("id", $this->brand)->first()), // to-do = change to use whenLoaded
             "year" => $this->year
         ];
     }

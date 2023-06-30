@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\CarType;
-use App\Models\CarBrand;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 

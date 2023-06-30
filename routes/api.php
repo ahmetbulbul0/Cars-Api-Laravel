@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CarBrandController;
+use App\Http\Controllers\CarController;
 use App\Http\Controllers\CarTypeController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,14 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+
+Route::prefix("car")->controller(CarController::class)->group(function () {
+    Route::get("/", "index");
+    Route::get("{car}", "show");
+    Route::post("store", "store");
+    Route::patch("{car}", "update");
+    Route::delete("{car}", "destroy");
+});
 
 Route::prefix("car-brand")->controller(CarBrandController::class)->group(function () {
     Route::get("/", "index");
