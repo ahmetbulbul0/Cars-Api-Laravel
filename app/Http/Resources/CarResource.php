@@ -22,7 +22,6 @@ class CarResource extends JsonResource
             "name" => Str::title($this->name),
             "type" => new CarTypeResource(CarType::where("id", $this->type)->first()), // to-do = change to use whenLoaded
             "brand" => new CarBrandResource(CarBrand::where("id", $this->brand)->first()), // to-do = change to use whenLoaded
-            "year" => $this->year
         ];
     }
 }

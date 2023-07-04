@@ -38,11 +38,6 @@ class CarUpdateRequest extends FormRequest
                 "nullable",
                 "integer",
                 "exists:car_brands,id"
-            ],
-            "year" => [
-                "nullable",
-                "integer",
-                "digits:4"
             ]
         ];
     }

@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\CarTypeController;
 use App\Http\Controllers\CarBrandController;
 use App\Http\Controllers\CarController;
-use App\Http\Controllers\CarTypeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,12 +16,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix("car")->controller(CarController::class)->group(function () {
+Route::prefix("car-type")->controller(CarTypeController::class)->group(function () {
     Route::get("/", "index");
-    Route::get("{car}", "show");
+    Route::get("{carType}", "show");
     Route::post("store", "store");
-    Route::patch("{car}", "update");
-    Route::delete("{car}", "destroy");
+    Route::patch("{carType}", "update");
+    Route::delete("{carType}", "destroy");
 });
 
 Route::prefix("car-brand")->controller(CarBrandController::class)->group(function () {
@@ -32,10 +32,10 @@ Route::prefix("car-brand")->controller(CarBrandController::class)->group(functio
     Route::delete("{carBrand}", "destroy");
 });
 
-Route::prefix("car-type")->controller(CarTypeController::class)->group(function () {
+Route::prefix("car")->controller(CarController::class)->group(function () {
     Route::get("/", "index");
-    Route::get("{carType}", "show");
+    Route::get("{car}", "show");
     Route::post("store", "store");
-    Route::patch("{carType}", "update");
-    Route::delete("{carType}", "destroy");
+    Route::patch("{car}", "update");
+    Route::delete("{car}", "destroy");
 });

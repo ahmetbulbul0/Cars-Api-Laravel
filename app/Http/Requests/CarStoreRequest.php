@@ -25,7 +25,6 @@ class CarStoreRequest extends FormRequest
             "name" => ["required", "string", "unique:cars,name"],
             "type" => ["required", "integer", "exists:car_types,id"],
             "brand" => ["required", "integer", "exists:car_brands,id"],
-            "year" => ["required", "integer", "digits:4"]
         ];
     }
 }

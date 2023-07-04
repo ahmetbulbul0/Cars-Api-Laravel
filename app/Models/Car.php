@@ -14,8 +14,7 @@ class Car extends Model
     protected $fillable = [
         "name",
         "type",
-        "brand",
-        "year"
+        "brand"
     ];
 
     protected $hidden = [

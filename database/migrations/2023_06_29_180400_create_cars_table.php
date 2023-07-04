@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string("name");
             $table->integer("type"); // car_types,id
             $table->integer("brand"); // car_brands,id
-            $table->integer("year");
             // IMPORTANT-COLUMNS
             $table->timestamps();
         });

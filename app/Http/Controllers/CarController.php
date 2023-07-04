@@ -31,13 +31,11 @@ class CarController extends Controller
 
         $type = intval($request->type);
         $brand = intval($request->brand);
-        $year = intval($request->year);
 
         $data = [
             "name" => $name,
             "type" => $type,
             "brand" => $brand,
-            "year" => $year
         ];
 
         $created = Car::create($data);
@@ -78,11 +76,6 @@ class CarController extends Controller
             $brand = intval($request->brand);
             $data["brand"] = $brand;
             $updatedColumns[] = "brand";
-        }
-        if (isset($request->year)) {
-            $year = intval($request->year);
-            $data["year"] = $year;
-            $updatedColumns[] = "year";
         }
 
         Car::where("id", $car->id)->update($data);
