@@ -35,8 +35,86 @@ php artisan key:generate
 php artisan migrate
 ```
 
+### Run Seeders (for datas)
+
+```sh
+php artisan db:seed
+```
+
 ### Run project
 
 ```sh
 php artisan serve
 ```
+
+## Api Documentation (/api)
+
+> **Car Types** (/car-types)
+>
+> -   _Listing_
+>     -   Method = _GET_
+>     -   Route = _/_
+> -   _Show_
+>     -   Method = _GET_
+>     -   Route = _/{carTypeId}_
+> -   _Create_
+>     -   Method = _POST_
+>     -   Route = _/_
+>     -   Data =
+>     -   -   name = _required & string & unique:car_types,name_
+> -   _Update_
+>     -   Method = _PATCH_
+>     -   Route = _/{carTypeId}_
+>     -   Data =
+>     -   -   name = _required & string & unique:car_types,name_
+> -   _Delete_
+>     -   Method = _DELETE_
+>     -   Route = _/{carTypeId}_
+
+> **Car Brands** (/car-brands)
+>
+> -   _Listing_
+>     -   Method = _GET_
+>     -   Route = _/_
+> -   _Show_
+>     -   Method = _GET_
+>     -   Route = _/{carBrandId}_
+> -   _Create_
+>     -   Method = _POST_
+>     -   Route = _/_
+>     -   Data =
+>     -   -   name = _required & string & unique:car_brands,name_
+> -   _Update_
+>     -   Method = _PATCH_
+>     -   Route = _/{carBrandId}_
+>     -   Data =
+>     -   -   name = _required & string & unique:car_brands,name_
+> -   _Delete_
+>     -   Method = _DELETE_
+>     -   Route = _/{carBrandId}_
+
+> **Cars** (/cars)
+>
+> -   _Listing_
+>     -   Method = _GET_
+>     -   Route = _/_
+> -   _Show_
+>     -   Method = _GET_
+>     -   Route = _/{carId}_
+> -   _Create_
+>     -   Method = _POST_
+>     -   Route = _/_
+>     -   Data =
+>     -   -   name = _required & string & unique:cars,name_
+>     -   -   type = _required & integer & exists:car_types,id_
+>     -   -   brand = _required & integer & exists:car_brands,id_
+> -   _Update_
+>     -   Method = _PATCH_
+>     -   Route = _/{carId}_
+>     -   Data =
+>     -   -   name = _required & string & unique:cars,name_
+>     -   -   type = _required & integer & exists:car_types,id_
+>     -   -   brand = _required & integer & exists:car_brands,id_
+> -   _Delete_
+>     -   Method = _DELETE_
+>     -   Route = _/{carId}_
