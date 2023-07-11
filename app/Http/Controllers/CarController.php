@@ -12,9 +12,16 @@ use App\Http\Resources\CarResource;
 
 class CarController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $cars = Car::all();
+        $cars = new Car();
+
+        if ($request->limit) {
+            $limit = intval($request->limit);
+            $cars = $cars->limit($limit);
+        }
+
+        $cars = $cars->get();
 
         $response = response()->json([
             "data" => new CarCollection($cars),

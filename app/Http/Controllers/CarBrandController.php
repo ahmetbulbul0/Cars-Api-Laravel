@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Car;
 use App\Models\CarBrand;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use App\Http\Resources\CarCollection;
 use App\Http\Resources\CarBrandResource;
 use App\Http\Resources\CarBrandCollection;
@@ -13,9 +14,16 @@ use App\Http\Requests\CarBrandUpdateRequest;
 
 class CarBrandController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $carBrands = CarBrand::all();
+        $carBrands = new CarBrand();
+
+        if ($request->limit) {
+            $limit = intval($request->limit);
+            $carBrands = $carBrands->limit($limit);
+        }
+
+        $carBrands = $carBrands->get();
 
         $response = response()->json([
             "data" => new CarBrandCollection($carBrands),

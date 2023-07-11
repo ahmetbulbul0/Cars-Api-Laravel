@@ -5,17 +5,25 @@ namespace App\Http\Controllers;
 use App\Models\Car;
 use App\Models\CarType;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Http\Resources\CarCollection;
 use App\Http\Resources\CarTypeResource;
+use App\Http\Resources\CarTypeCollection;
 use App\Http\Requests\CarTypeStoreRequest;
 use App\Http\Requests\CarTypeUpdateRequest;
-use App\Http\Resources\CarCollection;
-use App\Http\Resources\CarTypeCollection;
 
 class CarTypeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $carTypes = CarType::all();
+        $carTypes = new CarType();
+
+        if ($request->limit) {
+            $limit = intval($request->limit);
+            $carTypes = $carTypes->limit($limit);
+        }
+
+        $carTypes = $carTypes->get();
 
         $response = response()->json([
             "data" => new CarTypeCollection($carTypes),
