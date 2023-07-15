@@ -2,24 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Tools\ReqFilterGenerator;
 use App\Models\Car;
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
+use App\Http\Resources\CarResource;
 use App\Http\Resources\CarCollection;
+use App\Http\Requests\CarIndexRequest;
 use App\Http\Requests\CarStoreRequest;
 use App\Http\Requests\CarUpdateRequest;
-use App\Http\Resources\CarResource;
 
 class CarController extends Controller
 {
-    public function index(Request $request)
+    public function index(CarIndexRequest $request)
     {
         $cars = new Car();
 
-        if ($request->limit) {
-            $limit = intval($request->limit);
-            $cars = $cars->limit($limit);
-        }
+        $cars = ReqFilterGenerator::limit($request, $cars);
 
         $cars = $cars->get();
 

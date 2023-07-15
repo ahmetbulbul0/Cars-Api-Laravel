@@ -11,6 +11,7 @@ use App\Http\Resources\CarTypeResource;
 use App\Http\Resources\CarTypeCollection;
 use App\Http\Requests\CarTypeStoreRequest;
 use App\Http\Requests\CarTypeUpdateRequest;
+use App\Http\Controllers\Tools\ReqFilterGenerator;
 
 class CarTypeController extends Controller
 {
@@ -18,10 +19,7 @@ class CarTypeController extends Controller
     {
         $carTypes = new CarType();
 
-        if ($request->limit) {
-            $limit = intval($request->limit);
-            $carTypes = $carTypes->limit($limit);
-        }
+        $carTypes = ReqFilterGenerator::limit($request, $carTypes);
 
         $carTypes = $carTypes->get();
 

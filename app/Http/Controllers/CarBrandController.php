@@ -11,6 +11,7 @@ use App\Http\Resources\CarBrandResource;
 use App\Http\Resources\CarBrandCollection;
 use App\Http\Requests\CarBrandStoreRequest;
 use App\Http\Requests\CarBrandUpdateRequest;
+use App\Http\Controllers\Tools\ReqFilterGenerator;
 
 class CarBrandController extends Controller
 {
@@ -18,10 +19,7 @@ class CarBrandController extends Controller
     {
         $carBrands = new CarBrand();
 
-        if ($request->limit) {
-            $limit = intval($request->limit);
-            $carBrands = $carBrands->limit($limit);
-        }
+        $carBrands = ReqFilterGenerator::limit($request, $carBrands);
 
         $carBrands = $carBrands->get();
 
