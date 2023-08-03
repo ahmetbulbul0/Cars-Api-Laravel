@@ -21,10 +21,11 @@ class CarTypeController extends Controller
 
         $carTypes = ReqFilterGenerator::limit($request, $carTypes);
 
-        $carTypes = $carTypes->get();
+        $carTypes = ReqFilterGenerator::paginate($request, $carTypes);
 
         $response = response()->json([
-            "data" => new CarTypeCollection($carTypes),
+            "data" => new CarTypeCollection($carTypes["data"]),
+            "pagination" => $carTypes["pagination"]
         ], 200);
 
         return $response;

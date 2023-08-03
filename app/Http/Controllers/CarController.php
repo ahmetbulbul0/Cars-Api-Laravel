@@ -19,10 +19,11 @@ class CarController extends Controller
 
         $cars = ReqFilterGenerator::limit($request, $cars);
 
-        $cars = $cars->get();
+        $cars = ReqFilterGenerator::paginate($request, $cars);
 
         $response = response()->json([
-            "data" => new CarCollection($cars),
+            "data" => new CarCollection($cars["data"]),
+            "pagination" => $cars["pagination"]
         ], 200);
 
         return $response;
