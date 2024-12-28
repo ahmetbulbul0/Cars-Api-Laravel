@@ -13,68 +13,206 @@ class CarBrandSeeder extends Seeder
      */
     public function run(): void
     {
-        CarBrand::insert([
-            ["name" => "Alfa Romeo"],
-            ["name" => "Aston Martin"],
-            ["name" => "Audi"],
-            ["name" => "Bentley"],
-            ["name" => "BMW"],
-            ["name" => "Bugatti"],
-            ["name" => "Buick"],
-            ["name" => "Cadillac"],
-            ["name" => "Chery"],
-            ["name" => "Chevrolet"],
-            ["name" => "Chrysler"],
-            ["name" => "Citroen"],
-            ["name" => "Dacia"],
-            ["name" => "Daewoo"],
-            ["name" => "Daihatsu"],
-            ["name" => "Dodge"],
-            ["name" => "Ferrari"],
-            ["name" => "Fiat"],
-            ["name" => "Ford"],
-            ["name" => "Geely"],
-            ["name" => "Honda"],
-            ["name" => "Hyundai"],
-            ["name" => "Infiniti"],
-            ["name" => "Isuzu"],
-            ["name" => "Iveco"],
-            ["name" => "Jaguar"],
-            ["name" => "Jeep"],
-            ["name" => "Kia"],
-            ["name" => "Lada"],
-            ["name" => "Lamborghini"],
-            ["name" => "Lancia"],
-            ["name" => "Land-rover"],
-            ["name" => "Lexus"],
-            ["name" => "Lincoln"],
-            ["name" => "Lotus"],
-            ["name" => "Maserati"],
-            ["name" => "Mazda"],
-            ["name" => "McLaren"],
-            ["name" => "Mercedes-Benz"],
-            ["name" => "Mini"],
-            ["name" => "Mitsubishi"],
-            ["name" => "Nissan"],
-            ["name" => "Opel"],
-            ["name" => "Peugeot"],
-            ["name" => "Porsche"],
-            ["name" => "Proton"],
-            ["name" => "Renault"],
-            ["name" => "Rolls Royce"],
-            ["name" => "Rover"],
-            ["name" => "Saab"],
-            ["name" => "Seat"],
-            ["name" => "Skoda"],
-            ["name" => "Smart"],
-            ["name" => "Ssangyong"],
-            ["name" => "Subaru"],
-            ["name" => "Suzuki"],
-            ["name" => "Tata"],
-            ["name" => "Tofaş"],
-            ["name" => "Toyota"],
-            ["name" => "Volkswagen"],
-            ["name" => "Volvo"],
-        ]);
+        $carBrands = [
+            [
+                'name' => 'Toyota',
+                'country' => 'Japan',
+                'founded_year' => 1937
+            ],
+            [
+                'name' => 'Ford',
+                'country' => 'USA',
+                'founded_year' => 1903
+            ],
+            [
+                'name' => 'Volkswagen',
+                'country' => 'Germany',
+                'founded_year' => 1937
+            ],
+            [
+                'name' => 'Honda',
+                'country' => 'Japan',
+                'founded_year' => 1948
+            ],
+            [
+                'name' => 'BMW',
+                'country' => 'Germany',
+                'founded_year' => 1916
+            ],
+            [
+                'name' => 'Mercedes-Benz',
+                'country' => 'Germany',
+                'founded_year' => 1926
+            ],
+            [
+                'name' => 'Hyundai',
+                'country' => 'South Korea',
+                'founded_year' => 1967
+            ],
+            [
+                'name' => 'Nissan',
+                'country' => 'Japan',
+                'founded_year' => 1933
+            ],
+            [
+                'name' => 'Chevrolet',
+                'country' => 'USA',
+                'founded_year' => 1911
+            ],
+            [
+                'name' => 'Kia',
+                'country' => 'South Korea',
+                'founded_year' => 1944
+            ],
+            [
+                'name' => 'Tesla',
+                'country' => 'USA',
+                'founded_year' => 2003
+            ],
+            [
+                'name' => 'Peugeot',
+                'country' => 'France',
+                'founded_year' => 1810
+            ],
+            [
+                'name' => 'Renault',
+                'country' => 'France',
+                'founded_year' => 1899
+            ],
+            [
+                'name' => 'Fiat',
+                'country' => 'Italy',
+                'founded_year' => 1899
+            ],
+            [
+                'name' => 'Jeep',
+                'country' => 'USA',
+                'founded_year' => 1941
+            ],
+            [
+                'name' => 'Subaru',
+                'country' => 'Japan',
+                'founded_year' => 1953
+            ],
+            [
+                'name' => 'Mazda',
+                'country' => 'Japan',
+                'founded_year' => 1920
+            ],
+            [
+                'name' => 'Lexus',
+                'country' => 'Japan',
+                'founded_year' => 1989
+            ],
+            [
+                'name' => 'Porsche',
+                'country' => 'Germany',
+                'founded_year' => 1931
+            ],
+            [
+                'name' => 'Jaguar',
+                'country' => 'UK',
+                'founded_year' => 1935
+            ],
+            [
+                'name' => 'Land Rover',
+                'country' => 'UK',
+                'founded_year' => 1948
+            ],
+            [
+                'name' => 'Volvo',
+                'country' => 'Sweden',
+                'founded_year' => 1927
+            ],
+            [
+                'name' => 'Ferrari',
+                'country' => 'Italy',
+                'founded_year' => 1939
+            ],
+            [
+                'name' => 'Lamborghini',
+                'country' => 'Italy',
+                'founded_year' => 1963
+            ],
+            [
+                'name' => 'Bentley',
+                'country' => 'UK',
+                'founded_year' => 1919
+            ],
+            [
+                'name' => 'Aston Martin',
+                'country' => 'UK',
+                'founded_year' => 1913
+            ],
+            [
+                'name' => 'Rolls-Royce',
+                'country' => 'UK',
+                'founded_year' => 1906
+            ],
+            [
+                'name' => 'Mitsubishi',
+                'country' => 'Japan',
+                'founded_year' => 1870
+            ],
+            [
+                'name' => 'Chrysler',
+                'country' => 'USA',
+                'founded_year' => 1925
+            ],
+            [
+                'name' => 'Alfa Romeo',
+                'country' => 'Italy',
+                'founded_year' => 1910
+            ],
+            [
+                'name' => 'Citroën',
+                'country' => 'France',
+                'founded_year' => 1919
+            ],
+            [
+                'name' => 'Opel',
+                'country' => 'Germany',
+                'founded_year' => 1862
+            ],
+            [
+                'name' => 'Skoda',
+                'country' => 'Czech Republic',
+                'founded_year' => 1895
+            ],
+            [
+                'name' => 'Bugatti',
+                'country' => 'France',
+                'founded_year' => 1909
+            ],
+            [
+                'name' => 'Pagani',
+                'country' => 'Italy',
+                'founded_year' => 1992
+            ],
+            [
+                'name' => 'McLaren',
+                'country' => 'UK',
+                'founded_year' => 1963
+            ],
+            [
+                'name' => 'Suzuki',
+                'country' => 'Japan',
+                'founded_year' => 1909
+            ],
+            [
+                'name' => 'Dodge',
+                'country' => 'USA',
+                'founded_year' => 1900
+            ],
+            [
+                'name' => 'Cadillac',
+                'country' => 'USA',
+                'founded_year' => 1902
+            ],
+        ];
+
+        foreach ($carBrands as $brand) {
+            CarBrand::create($brand);
+        }
     }
 }

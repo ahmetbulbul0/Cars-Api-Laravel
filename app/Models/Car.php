@@ -12,9 +12,17 @@ class Car extends Model
     protected $table = "cars";
 
     protected $fillable = [
-        "name",
-        "type",
-        "brand"
+        "model_name",
+        "brand_id",
+        "type_id",
+        "production_year",
+        "color",
+        "engine_type",
+        "horsepower",
+        "torque",
+        "transmission",
+        "fuel_consumption",
+        "price",
     ];
 
     protected $hidden = [
@@ -22,11 +30,18 @@ class Car extends Model
         "created_at"
     ];
 
-    public function type() {
-        return $this->hasOne(CarType::class, "id", "type");
+    public function brand()
+    {
+        return $this->belongsTo(CarBrand::class, 'brand_id');
     }
 
-    public function brand() {
-        return $this->hasOne(CarBrand::class, "id", "brand");
+    public function type()
+    {
+        return $this->belongsTo(CarType::class, 'type_id');
+    }
+
+    public function features()
+    {
+        return $this->belongsToMany(CarFeature::class, 'car_car_feature', 'car_id', 'feature_id');
     }
 }

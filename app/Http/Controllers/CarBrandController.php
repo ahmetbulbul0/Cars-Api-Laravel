@@ -33,12 +33,14 @@ class CarBrandController extends Controller
 
     public function store(CarBrandStoreRequest $request)
     {
-        $name = $request->name;
-        $name = Str::lower($name);
-        $name = htmlspecialchars($name);
+        $name = Str::lower($request->name);
+        $country = Str::lower($request->country);
+        $foundedYear = intval($request->foundedYear);
 
         $data = [
-            "name" => $name
+            "name" => $name,
+            "country" => $country,
+            "founded_year" => $foundedYear,
         ];
 
         $created = CarBrand::create($data);
@@ -50,8 +52,10 @@ class CarBrandController extends Controller
         return $response;
     }
 
-    public function show(CarBrand $carBrand)
+    public function show($carBrandId)
     {
+        $carBrand = CarBrand::where("id", $carBrandId)->first();
+
         $response = response()->json([
             "item" => new CarBrandResource($carBrand),
         ], 200);

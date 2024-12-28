@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('car_types', function (Blueprint $table) {
             $table->id();
             // IMPORTANT-COLUMNS
-            $table->string("name")->unique();
+            $table->string('name');
+            $table->text('description')->nullable();
             // IMPORTANT-COLUMNS
             $table->timestamps();
         });

@@ -19,9 +19,21 @@ class CarResource extends JsonResource
     {
         return [
             "id" => $this->id,
-            "name" => Str::title($this->name),
-            "type" => new CarTypeResource(CarType::where("id", $this->type)->first()), // to-do = change to use whenLoaded
-            "brand" => new CarBrandResource(CarBrand::where("id", $this->brand)->first()), // to-do = change to use whenLoaded
+            "modelName" => $this->model_name,
+            "brandId" => $this->brand_id,
+            "typeId" => $this->type_id,
+            "productionYear" => $this->production_year,
+            "color" => $this->color,
+            "engineType" => $this->engine_type,
+            "horsepower" => $this->horsepower,
+            "torque" => $this->torque,
+            "transmission" => $this->transmission,
+            "fuelConsumption" => $this->fuel_consumption,
+            "price" => $this->price,
+
+            'brand' => new CarBrandResource($this->whenLoaded('brand')),
+            'type' => new CarTypeResource($this->whenLoaded('type')),
+            'features' => CarFeatureResource::collection($this->whenLoaded('features')),
         ];
     }
 }

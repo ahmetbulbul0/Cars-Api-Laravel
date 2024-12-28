@@ -33,12 +33,9 @@ class CarTypeController extends Controller
 
     public function store(CarTypeStoreRequest $request)
     {
-        $name = $request->name;
-        $name = Str::lower($name);
-        $name = htmlspecialchars($name);
-
         $data = [
-            "name" => $name
+            "name" => Str::lower($request->name),
+            "description" => Str::lower($request->description),
         ];
 
         $created = CarType::create($data);
@@ -50,8 +47,10 @@ class CarTypeController extends Controller
         return $response;
     }
 
-    public function show(CarType $carType)
+    public function show($carTypeId)
     {
+        $carType = CarType::where("id", $carTypeId)->first();
+
         $response = response()->json([
             "item" => new CarTypeResource($carType),
         ], 200);

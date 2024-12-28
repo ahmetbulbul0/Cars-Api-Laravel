@@ -16,8 +16,10 @@ class CarTypeResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            "id" => $this->id,
-            "name" => Str::title($this->name)
+            'id' => $this->id,
+            'name' => $this->name,
+            'description' => $this->description,
+            'cars' => CarResource::collection($this->whenLoaded('cars')), // Türle ilişkili araçlar
         ];
     }
 }

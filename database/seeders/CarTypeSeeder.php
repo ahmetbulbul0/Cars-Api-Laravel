@@ -13,26 +13,51 @@ class CarTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        CarType::insert([
-            ["name" => "micro"],
-            ["name" => "sedan"],
-            ["name" => "hatchback"],
-            ["name" => "liftback"],
-            ["name" => "coupe"],
-            ["name" => "cabriolet"],
-            ["name" => "roadster"],
-            ["name" => "targa"],
-            ["name" => "limousine"],
-            ["name" => "muscle"],
-            ["name" => "sport"],
-            ["name" => "super"],
-            ["name" => "suv"],
-            ["name" => "crossover"],
-            ["name" => "pickup"],
-            ["name" => "van"],
-            ["name" => "minivan"],
-            ["name" => "minibus"],
-            ["name" => "campervan"]
-        ]);
+        $carTypes = [
+            [
+                'name' => 'Sedan',
+                'description' => 'A compact or full-sized car with a separate trunk.'
+            ],
+            [
+                'name' => 'SUV',
+                'description' => 'Sports Utility Vehicle, larger and often all-wheel-drive.'
+            ],
+            [
+                'name' => 'Hatchback',
+                'description' => 'A small car with a rear door that swings upward.'
+            ],
+            [
+                'name' => 'Coupe',
+                'description' => 'A two-door car often sporty in nature.'
+            ],
+            [
+                'name' => 'Convertible',
+                'description' => 'A car with a retractable roof.'
+            ],
+            [
+                'name' => 'Truck',
+                'description' => 'A vehicle designed for transporting goods.'
+            ],
+            [
+                'name' => 'Van',
+                'description' => 'A larger vehicle for transporting people or cargo.'
+            ],
+            [
+                'name' => 'Electric',
+                'description' => 'A car powered by electricity rather than fuel.'
+            ],
+            [
+                'name' => 'Hybrid',
+                'description' => 'A car powered by both electricity and fuel.'
+            ],
+            [
+                'name' => 'Crossover',
+                'description' => 'A car combining features of a sedan and an SUV.'
+            ],
+        ];
+
+        foreach ($carTypes as $type) {
+            CarType::create($type);
+        }
     }
 }

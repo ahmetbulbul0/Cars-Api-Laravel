@@ -10,12 +10,15 @@ use App\Http\Resources\CarCollection;
 use App\Http\Requests\CarIndexRequest;
 use App\Http\Requests\CarStoreRequest;
 use App\Http\Requests\CarUpdateRequest;
+use App\Models\CarCarFeature;
 
 class CarController extends Controller
 {
     public function index(CarIndexRequest $request)
     {
         $cars = new Car();
+
+        $cars = $cars->with("brand", "type", "features");
 
         $cars = ReqFilterGenerator::limit($request, $cars);
 
@@ -31,20 +34,45 @@ class CarController extends Controller
 
     public function store(CarStoreRequest $request)
     {
-        $name = $request->name;
-        $name = Str::lower($name);
-        $name = htmlspecialchars($name);
-
-        $type = intval($request->type);
-        $brand = intval($request->brand);
+        $modelName = Str::lower($request->modelName);
+        $brandId = $request->brandId;
+        $typeId = $request->typeId;
+        $productionYear = $request->productionYear;
+        $color = Str::lower($request->color);
+        $engineType = Str::lower($request->engineType);
+        $horsepower = $request->horsepower;
+        $torque = $request->torque;
+        $transmission = Str::lower($request->transmission);
+        $fuelConsumption = $request->fuelConsumption;
+        $price = $request->price;
+        $features = $request->features;
 
         $data = [
-            "name" => $name,
-            "type" => $type,
-            "brand" => $brand,
+            "model_name" => $modelName,
+            "brand_id" => $brandId,
+            "type_id" => $typeId,
+            "production_year" => $productionYear,
+            "color" => $color,
+            "engine_type" => $engineType,
+            "horsepower" => $horsepower,
+            "torque" => $torque,
+            "transmission" => $transmission,
+            "fuel_consumption" => $fuelConsumption,
+            "price" => $price,
         ];
 
         $created = Car::create($data);
+
+        if (count($features) > 0) {
+            foreach ($features as $featureId) {
+                CarCarFeature::create([
+                    "car_id" => $created->id,
+                    "feature_id" => $featureId
+                ]);
+            }
+        }
+
+        $created = Car::where("id", $created->id)->with("brand", "type", "features")->first();
 
         $response = response()->json([
             "created" => new CarResource($created),
@@ -53,8 +81,10 @@ class CarController extends Controller
         return $response;
     }
 
-    public function show(Car $car)
+    public function show($carId)
     {
+        $car = Car::where("id", $carId)->with("brand", "type", "features")->first();
+
         $response = response()->json([
             "item" => new CarResource($car),
         ], 200);

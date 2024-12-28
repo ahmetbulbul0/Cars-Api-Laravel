@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CarController;
 use App\Http\Controllers\CarTypeController;
 use App\Http\Controllers\CarBrandController;
-use App\Http\Controllers\CarController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CarFeatureController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix("car-type")->controller(CarTypeController::class)->group(function () {
     Route::get("/", "index");
-    Route::get("{carType}", "show");
+    Route::get("{carTypeId}", "show");
     Route::post("store", "store");
     Route::patch("{carType}", "update");
     Route::delete("{carType}", "destroy");
@@ -26,7 +27,7 @@ Route::prefix("car-type")->controller(CarTypeController::class)->group(function 
 
 Route::prefix("car-brand")->controller(CarBrandController::class)->group(function () {
     Route::get("/", "index");
-    Route::get("{carBrand}", "show");
+    Route::get("{carBrandId}", "show");
     Route::post("store", "store");
     Route::patch("{carBrand}", "update");
     Route::delete("{carBrand}", "destroy");
@@ -34,8 +35,12 @@ Route::prefix("car-brand")->controller(CarBrandController::class)->group(functio
 
 Route::prefix("car")->controller(CarController::class)->group(function () {
     Route::get("/", "index");
-    Route::get("{car}", "show");
+    Route::get("{carId}", "show");
     Route::post("store", "store");
     Route::patch("{car}", "update");
     Route::delete("{car}", "destroy");
+});
+
+Route::prefix("car-feature")->controller(CarFeatureController::class)->group(function () {
+    Route::get("/", "index");
 });

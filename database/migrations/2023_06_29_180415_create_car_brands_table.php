@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('car_brands', function (Blueprint $table) {
             $table->id();
             // IMPORTANT-COLUMNS
-            $table->string("name")->unique();
+            $table->string('name');
+            $table->string('country')->nullable();
+            $table->integer('founded_year')->nullable();
             // IMPORTANT-COLUMNS
             $table->timestamps();
         });

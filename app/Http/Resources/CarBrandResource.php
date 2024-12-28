@@ -16,8 +16,11 @@ class CarBrandResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            "id" => $this->id,
-            "name" => Str::title($this->name)
+            'id' => $this->id,
+            'name' => $this->name,
+            'country' => $this->country,
+            'foundedYear' => $this->founded_year,
+            'cars' => CarResource::collection($this->whenLoaded('cars')), // Markanın araçları eklendiğinde döndürülür
         ];
     }
 }

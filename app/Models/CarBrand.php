@@ -12,7 +12,9 @@ class CarBrand extends Model
     protected $table = "car_brands";
 
     protected $fillable = [
-        "name"
+        "name",
+        "country",
+        "founded_year"
     ];
 
     protected $hidden = [
@@ -20,7 +22,8 @@ class CarBrand extends Model
         "created_at"
     ];
 
-    public function cars() {
-        return $this->hasMany(Car::class, "brand", "id");
+    public function cars()
+    {
+        return $this->hasMany(Car::class, 'brand_id');
     }
 }
