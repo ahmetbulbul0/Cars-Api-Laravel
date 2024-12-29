@@ -61,26 +61,33 @@ class CarTypeController extends Controller
     public function update(CarTypeUpdateRequest $request, CarType $carType)
     {
         $data = [];
-        $udatedColumns = [];
+        $updatedColumns = [];
 
-        if (isset($request->name)) {
+        if ($request->has('name')) {
             $name = Str::lower($request->name);
-            $name = htmlspecialchars($request->name);
-            $data["name"] = $name;
-            $udatedColumns[] = "name";
+            $data['name'] = $name;
+            $updatedColumns[] = 'name';
         }
 
-        CarType::where("id", $carType->id)->update($data);
-        $updated = CarType::where("id", $carType->id)->first();
+        if ($request->has('description')) {
+            $description = $request->description;
+            $data['description'] = $description;
+            $updatedColumns[] = 'description';
+        }
 
-        $response = response()->json([
-            "updated_old" => new CarTypeResource($carType),
-            "updated_new" => new CarTypeResource($updated),
-            "what_updated" => $udatedColumns
+        if (!empty($data)) {
+            $carType->update($data);
+        }
+
+        $updated = CarType::find($carType->id);
+
+        return response()->json([
+            'updated_old' => new CarTypeResource($carType),
+            'updated_new' => new CarTypeResource($updated),
+            'what_updated' => $updatedColumns,
         ], 200);
-
-        return $response;
     }
+
 
     public function destroy(CarType $carType)
     {
