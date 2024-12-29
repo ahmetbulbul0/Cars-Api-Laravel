@@ -91,18 +91,11 @@ class CarTypeController extends Controller
 
     public function destroy(CarType $carType)
     {
-        $cars = Car::where("type", $carType->id)->get();
+        $carType->delete();
 
-        Car::where("type", $carType->id)->delete();
-        CarType::where("id", $carType->id)->delete();
-
-        $response = response()->json([
+        return response()->json([
             "deleted" => new CarTypeResource($carType),
-            "deleted_relations" => [
-                "cars" => new CarCollection($cars)
-            ]
         ], 200);
-
-        return $response;
     }
+
 }
