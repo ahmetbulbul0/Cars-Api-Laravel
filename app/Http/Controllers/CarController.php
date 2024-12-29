@@ -142,12 +142,11 @@ class CarController extends Controller
 
     public function destroy(Car $car)
     {
-        Car::where("id", $car->id)->delete();
+        $car->delete();
 
-        $response = response()->json([
-            "deleted" => new CarResource($car),
+        return response()->json([
+            'deleted' => new CarResource($car),
         ], 200);
-
-        return $response;
     }
+
 }
