@@ -66,26 +66,39 @@ class CarBrandController extends Controller
     public function update(CarBrandUpdateRequest $request, CarBrand $carBrand)
     {
         $data = [];
-        $udatedColumns = [];
+        $updatedColumns = [];
 
-        if (isset($request->name)) {
-            $name = Str::lower($request->name);
-            $name = htmlspecialchars($request->name);
-            $data["name"] = $name;
-            $udatedColumns[] = "name";
+        if ($request->has('name')) {
+            $name = Str::lower(htmlspecialchars($request->name));
+            $data['name'] = $name;
+            $updatedColumns[] = 'name';
         }
 
-        CarBrand::where("id", $carBrand->id)->update($data);
-        $updated = CarBrand::where("id", $carBrand->id)->first();
+        if ($request->has('country')) {
+            $country = htmlspecialchars($request->country);
+            $data['country'] = $country;
+            $updatedColumns[] = 'country';
+        }
 
-        $response = response()->json([
-            "updated_old" => new CarBrandResource($carBrand),
-            "updated_new" => new CarBrandResource($updated),
-            "what_updated" => $udatedColumns
+        if ($request->has('foundedYear')) {
+            $foundedYear = (int) $request->foundedYear;
+            $data['founded_year'] = $foundedYear;
+            $updatedColumns[] = 'foundedYear';
+        }
+
+        if (!empty($data)) {
+            $carBrand->update($data);
+        }
+
+        $updated = CarBrand::find($carBrand->id);
+
+        return response()->json([
+            'updated_old' => new CarBrandResource($carBrand),
+            'updated_new' => new CarBrandResource($updated),
+            'what_updated' => $updatedColumns,
         ], 200);
-
-        return $response;
     }
+
 
     public function destroy(CarBrand $carBrand)
     {
