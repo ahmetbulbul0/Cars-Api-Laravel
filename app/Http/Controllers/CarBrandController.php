@@ -102,18 +102,11 @@ class CarBrandController extends Controller
 
     public function destroy(CarBrand $carBrand)
     {
-        $cars = Car::where("type", $carBrand->id)->get();
+        $carBrand->delete();
 
-        Car::where("type", $carBrand->id)->delete();
-        CarBrand::where("id", $carBrand->id)->delete();
-
-        $response = response()->json([
+        return response()->json([
             "deleted" => new CarBrandResource($carBrand),
-            "deleted_relations" => [
-                "cars" => new CarCollection($cars)
-            ]
         ], 200);
-
-        return $response;
     }
+
 }

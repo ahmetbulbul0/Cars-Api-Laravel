@@ -94,36 +94,50 @@ class CarController extends Controller
 
     public function update(CarUpdateRequest $request, Car $car)
     {
+        $updatableFields = [
+            'name' => 'string',
+            'type' => 'integer',
+            'brand' => 'integer',
+            'productionYear' => 'integer',
+            'color' => 'string',
+            'engineType' => 'string',
+            'horsepower' => 'integer',
+            'torque' => 'integer',
+            'transmission' => 'string',
+            'fuelConsumption' => 'numeric',
+            'price' => 'numeric',
+        ];
+
         $data = [];
-        $udatedColumns = [];
+        $updatedColumns = [];
 
-        if (isset($request->name)) {
-            $name = Str::lower($request->name);
-            $name = htmlspecialchars($request->name);
-            $data["name"] = $name;
-            $udatedColumns[] = "name";
-        }
-        if (isset($request->type)) {
-            $type = intval($request->type);
-            $data["type"] = $type;
-            $updatedColumns[] = "type";
-        }
-        if (isset($request->brand)) {
-            $brand = intval($request->brand);
-            $data["brand"] = $brand;
-            $updatedColumns[] = "brand";
+        foreach ($updatableFields as $field => $type) {
+            if ($request->has($field)) {
+                $value = match ($type) {
+                    'integer' => intval($request->$field),
+                    'numeric' => floatval($request->$field),
+                    'string' => htmlspecialchars($request->$field),
+                    default => $request->$field,
+                };
+                $data[Str::snake($field)] = $value;
+                $updatedColumns[] = $field;
+            }
         }
 
-        Car::where("id", $car->id)->update($data);
-        $updated = Car::where("id", $car->id)->first();
+        $car->update($data);
 
-        $response = response()->json([
-            "updated_old" => new CarResource($car),
-            "updated_new" => new CarResource($updated),
-            "what_updated" => $udatedColumns
+        if ($request->has('features')) {
+            $car->features()->sync($request->features);
+            $updatedColumns[] = 'features';
+        }
+
+        $updated = Car::with('features')->find($car->id);
+
+        return response()->json([
+            'updated_old' => new CarResource($car),
+            'updated_new' => new CarResource($updated),
+            'what_updated' => $updatedColumns,
         ], 200);
-
-        return $response;
     }
 
     public function destroy(Car $car)
