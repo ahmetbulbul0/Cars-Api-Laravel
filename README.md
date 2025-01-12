@@ -18,6 +18,7 @@ This project serves as a solid foundation for applications needing vehicle data,
 
 - Php
 - Laravel
+- MySql
 
 ## Setup
 
